@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-
 class DashboardDetails extends StatefulWidget {
   const DashboardDetails({super.key});
 
@@ -62,9 +61,6 @@ class _DashboardDetailsState extends State<DashboardDetails> {
     _controller.dispose();
     super.dispose();
   }
-
-  @override
-
 }
 
 class ChartData {

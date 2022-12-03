@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 
 class DashboardDetails extends StatefulWidget {
   const DashboardDetails({super.key});
@@ -10,7 +9,6 @@ class DashboardDetails extends StatefulWidget {
 
 class _DashboardDetailsState extends State<DashboardDetails> {
   final TextEditingController _controller = TextEditingController();
-  final _channel = WebSocketChannel.connect(Uri.parse('ws://localhost:8765'));
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +31,7 @@ class _DashboardDetailsState extends State<DashboardDetails> {
             StreamBuilder(
               stream: _channel.stream,
               builder: (context, snapshot) {
+                print("snapshot: ${snapshot.data}");
                 return Text(snapshot.hasData ? '${snapshot.data}' : '');
               },
             )
@@ -60,6 +59,12 @@ class _DashboardDetailsState extends State<DashboardDetails> {
     _channel.sink.close();
     _controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print('init ws connection');
   }
 }
 
